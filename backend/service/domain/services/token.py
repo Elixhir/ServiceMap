@@ -5,7 +5,7 @@ from datetime import timedelta
 class Token(ABC):
     
     @abstractmethod
-    def create_acces_token(
+    def create_access_token(
         self, 
         subject: str, 
         claims: Optional[Mapping[str, str]] = None,

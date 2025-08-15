@@ -6,3 +6,4 @@ geoalchemy2
 python-dotenv
 alembic
 uvicorn[standard]
+passlib[bcrypt]==1.7.4

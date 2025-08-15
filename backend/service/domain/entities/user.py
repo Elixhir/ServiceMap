@@ -2,8 +2,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Optional
 from datetime import datetime
-
-from exceptions import InactiveUserError
+from service.domain.exceptions import InactiveUserError
 
 @dataclass
 class User:
@@ -21,7 +20,7 @@ class User:
         return hasher.verify(raw_password, self.password_hash)
     
     @classmethod
-    def create_with_password(self, email:str, raw_password: str, hasher: "PasswordHasher") -> User: # type: ignore
+    def create_with_password(cls, email:str, raw_password: str, hasher: "PasswordHasher") -> User: # type: ignore
         normalized = email.strip().lower()
         hashed = hasher.hash(raw_password)
-        return self(id=None, email=normalized, password_hash=hashed, is_active=True)
+        return cls(id=None, email=normalized, password_hash=hashed, is_active=True)

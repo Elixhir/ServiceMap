@@ -1,8 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from service.presentation.routers import auth_router
 
 app = FastAPI()
+app.include_router(auth_router.router, prefix="/auth", tags=["Auth"])
 
 app.mount("/assets", StaticFiles(directory="assets"), name="assets")
 

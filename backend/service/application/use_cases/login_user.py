@@ -1,8 +1,8 @@
-from domain.repositories.user import UserRepository
-from domain.services.password_hasher import PasswordHasher
-from domain.services.token import Token
-from domain.exceptions import InvalidCredentialsError
-from application.dto import LoginUserInput, AuthOutput
+from service.domain.repositories.user import UserRepository
+from service.domain.services.password_hasher import PasswordHasher
+from service.domain.services.token import Token
+from service.domain.exceptions import InvalidCredentialsError
+from service.application.dto import LoginUserInput, AuthOutput
 
 
 class LoginUser:
@@ -23,5 +23,9 @@ class LoginUser:
 
         user.ensure_active()
 
-        token = self.token_service.create_access_token(subject=str(user.id))
-        return AuthOutput(access_token=token)
+        token = self.token_service.create_access_token(user)
+        return AuthOutput(
+            access_token=token,
+            user_id=user.id,
+            email=user.email
+        )

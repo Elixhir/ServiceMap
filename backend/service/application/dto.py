@@ -13,4 +13,6 @@ class LoginUserInput:
 @dataclass
 class AuthOutput:
     access_token: str
-    token_type: str = "bearer"
+    user_id: int
+    email: str
+

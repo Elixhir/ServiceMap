@@ -1,6 +1,6 @@
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey, func
+from sqlalchemy import Column, Integer, String, Boolean, DateTime, func
 from sqlalchemy.orm import relationship
-from infrastructure.database.connection import Base
+from service.infrastructure.database.connection import Base
 
 class User(Base):
     __tablename__ = "users"
@@ -11,6 +11,24 @@ class User(Base):
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
-    profile = relationship("Profile", back_populates="user", uselist=False)
-    subscription = relationship("Subscription", back_populates="user", uselist=False)
-    business = relationship("Business", back_populates="owner", uselist=False)
+    profile = relationship(
+        "Profile",
+        back_populates="user",
+        uselist=False,
+        cascade="all, delete-orphan",
+        single_parent=True
+    )
+    subscription = relationship(
+        "Subscription",
+        back_populates="user",
+        uselist=False,
+        cascade="all, delete-orphan",
+        single_parent=True
+    )
+    business = relationship(
+        "Business",
+        back_populates="owner",
+        uselist=False,
+        cascade="all, delete-orphan",
+        single_parent=True
+    )
