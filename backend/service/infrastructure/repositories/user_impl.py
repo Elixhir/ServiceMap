@@ -41,7 +41,7 @@ class UserRepositoryImpl(UserRepository):
 
         profile = ProfileModel(user_id=db_user.id, full_name="", phone="", address="")
         subscription = SubscriptionModel(user_id=db_user.id, plan_name="", is_active=False)
-        business = BusinessModel(owner_id=db_user.id, name="", description="", is_active=False, location="POINT(0 0)")
+        business = BusinessModel(owner_id=db_user.id, name="", description="", is_active=False, latitude=None, longitude=None)
 
         self.db.add_all([profile, subscription, business])
         self.db.commit()
