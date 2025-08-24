@@ -6,7 +6,7 @@ from service.domain.exceptions import InactiveUserError
 
 @dataclass
 class User:
-    id: Optional[int]
+    id: int
     email: str
     password_hash: str
     is_active: bool = True
