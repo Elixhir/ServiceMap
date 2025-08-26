@@ -62,6 +62,7 @@ def login(request: LoginRequest, db: Session = Depends(get_db)):
     return {
         "id": auth_output.user_id,
         "email": auth_output.email,
-        "access_token": auth_output.access_token
+        "access_token": auth_output.access_token,
+        "token_type": "bearer"
     }
 

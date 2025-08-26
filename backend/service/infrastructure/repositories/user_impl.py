@@ -3,7 +3,6 @@ from sqlalchemy.orm import Session
 from service.domain.entities.user import User
 from service.domain.repositories.user import UserRepository
 from service.infrastructure.sqlalchemy_models.user import User as UserModel
-from service.infrastructure.sqlalchemy_models.profile import Profile as ProfileModel
 from service.infrastructure.sqlalchemy_models.subscription import Subscription as SubscriptionModel
 from service.infrastructure.sqlalchemy_models.business import Business as BusinessModel
 
@@ -39,13 +38,13 @@ class UserRepositoryImpl(UserRepository):
         self.db.commit()
         self.db.refresh(db_user)
 
-        profile = ProfileModel(user_id=db_user.id, full_name="", phone="", address="")
+        #profile = ProfileModel(user_id=db_user.id, full_name="", phone="", address="")
         subscription = SubscriptionModel(user_id=db_user.id, plan_name="", is_active=False)
         business = BusinessModel(owner_id=db_user.id, name="", description="", is_active=False, latitude=None, longitude=None)
 
-        self.db.add_all([profile, subscription, business])
+        self.db.add_all([subscription, business])
         self.db.commit()
-        self.db.refresh(profile)
+        #self.db.refresh(profile)
         self.db.refresh(subscription)
         self.db.refresh(business)
 

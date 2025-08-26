@@ -13,7 +13,11 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 60
 class JWTTokenService(Token):
     def create_access_token(self, user: User) -> str:
         expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-        payload = {"sub": user.email, "exp": expire}
+        payload = {
+            "sub": str(user.id),
+            "email": user.email,
+            "exp": expire
+        }
         return jwt.encode(payload, JWT_SECRET_KEY, algorithm=ALGORITHM)
 
     def decode(self, token: str):

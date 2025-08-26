@@ -10,8 +10,12 @@ class Business(Base):
     name = Column(String, nullable=False)
     description = Column(String)
     is_active = Column(Boolean, default=True)
-    latitude = Column(Float, nullable=True)
-    longitude = Column(Float, nullable=True)
+    category = Column(String(100), nullable=True)
+    description = Column(String(255), nullable=True)
+    latitude = Column(Float, nullable=False)
+    longitude = Column(Float, nullable=False)
+    address = Column(String(255), nullable=True)
+    phone = Column(String(50), nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     owner = relationship(

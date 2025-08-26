@@ -6,8 +6,11 @@ class Business():
     id: int
     name: str
     description: str
-    is_active: bool
     latitude: float
     longitude: float
-    created_at: datetime
     owner_id: int
+    category: str
+    address: str
+    phone: str
+    is_active: bool = True
+    created_at: datetime = datetime.utcnow()

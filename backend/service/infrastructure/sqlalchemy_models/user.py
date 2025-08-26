@@ -11,13 +11,6 @@ class User(Base):
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
-    profile = relationship(
-        "Profile",
-        back_populates="user",
-        uselist=False,
-        cascade="all, delete-orphan",
-        single_parent=True
-    )
     subscription = relationship(
         "Subscription",
         back_populates="user",

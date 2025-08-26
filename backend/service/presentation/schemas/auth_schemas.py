@@ -7,3 +7,8 @@ class RegisterRequest(BaseModel):
 class LoginRequest(BaseModel):
     email: EmailStr
     password: str
+
+class CurrentUser(BaseModel):
+    id: int
+    email: str
+    has_active_subscription: bool
